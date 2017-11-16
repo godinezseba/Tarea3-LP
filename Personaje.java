@@ -16,6 +16,6 @@ abstract class Personaje{
   abstract int vida_actual_IO();
   /** Afecta la vida del NPC en cuestion, retorna la vida resultante, la implementacion
    * dependera si nuestro NPC tiene defensa, objetos, etc.*/
-  abstract int cambio_vida();
+  abstract int cambio_vida(int ataque);
 }
 
