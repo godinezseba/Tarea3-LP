@@ -1,7 +1,6 @@
 public interface Ataque{
 	/** Esta funcion se aplica al NPC que va a atacar y retorna el numero
-	 * de daÃ±o, incluyendo todos los objetos que se aplicaran.*/
-	int Atacar(int ataque);
-	int get_ataque();
-	int get_defensa();
+	 * de daño, incluyendo todos los objetos que se aplicaran.*/
+	int Atacar();
+	
 }
