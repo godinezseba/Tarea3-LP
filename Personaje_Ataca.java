@@ -7,4 +7,6 @@ public abstract class Personaje_Ataca extends Personaje{
 	    ataque_base = ataque_inicial;
 	    defensa_base = defensa_inicial;
 	  }
+	  
+
 }

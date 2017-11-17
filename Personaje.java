@@ -16,4 +16,3 @@ abstract class Personaje{
    * dependera si nuestro NPC tiene defensa, objetos, etc.*/
   abstract int cambio_vida(int ataque);
 }
-
