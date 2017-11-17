@@ -1,13 +1,10 @@
-import java.util.LinkedList;
-import java.util.Random;
+import java.lang.Math;
 public class Jugador extends Personaje_Ataca implements Ataque{
 	String Nombre;
-	Objeto []objetos; // va a ser un array con maximo 3 Objetos {tuyo,aliado,nivel}
 	int[] ataque_especial1; // Ataque Especial 1, [pp, ataque] 
 	int[] ataque_especial2; // Ataque Especial 2, [pp, ataque]
 	int ppmax; // es el pp maximo que va a tener nuestro personaje
 	int ppactual; // pp a que tiene en un momento dado de la pelea
-	
 	
 	/**Constructor de nuestro jugador, tiene que entregar:
 	 * Vida Inicial, Ataque Inicial, Defensa Inicial, Nombre, Ataque Especial 1:pp, bonus
@@ -15,71 +12,77 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 	public Jugador(int vida_inicial,int ataque_inicial, int defensa_inicial,String Name,int pp1, int pp2, int bonus1, int bonus2){
 		super(vida_inicial,ataque_inicial,defensa_inicial,"bueno");
 		Nombre = Name;
-		objetos = new Objeto[3];
 		
 		ataque_especial1 = new  int[2];
 		ataque_especial2 = new  int[2];
+		
 		ataque_especial1[0]=pp1;
 		ataque_especial1[1]=bonus1;
 		ataque_especial2[0]=pp2;
 		ataque_especial2[1]=bonus2;
 	}
-	/**Agrega el objeto ingresado al jugador, junto con la posicion {0 = opcional; 1 = aliado; 2 = nivel}.*/
-	public void agregar_objeto(Objeto nuevo,int pos) {
-
+	/**Agrega el objeto ingresado al jugador, se asigna directamente a la variable que afecta el objeto.*/
+	public void agregar_objeto(Objeto nuevo) {
+		if(nuevo.tipo() == "ataque")
+			ataque_base += nuevo.Bonus();
+		else if(nuevo.tipo() == "defensa")
+			defensa_base += nuevo.Bonus();
+		else if (nuevo.tipo() == "vida")
+			vida_actual += nuevo.Bonus();
 	}
-	/**Elimina el objeto dado al Jugador, si no esta no pasa nada.*/
-	public void eliminar(int pos) {
-		objetos.remove(pormatar);
+	/**Elimina el objeto dado al Jugador, si este se aplica a la vida y la vida da <= 0 retorna True haciendo referencia que murio
+	 * en cualquier otro caso retorna False.*/
+	public Boolean eliminar_objeto(Objeto pormatar) {
+		if(pormatar.tipo() == "ataque")
+			ataque_base -= pormatar.Bonus();
+		else if(pormatar.tipo() == "defensa")
+			defensa_base -= pormatar.Bonus();
+		else if (pormatar.tipo() == "vida")
+			vida_actual -= pormatar.Bonus();
+		if(vida_actual <= 0)
+			return true; // retorna True si el Jugador muere por perder el objeto
+		else
+			return false; // retorna False si el Jugador no muere por perder el objeto
 	}
 	/**Retorna la vida del Jugador mas toda la vida extra por los objetos y la defensa*/
 	public int vida_actual_enAtaque(){
-		int suma_vida = 0;
-		Objeto aux;
-		// agrego los stats dados por los objetos
-		for(int i; i < objetos.size(); i++) {
-			aux = objetos.get();
-			if(aux.tipo() == "vida" || aux.tipo() == "defensa") // si el objeto es de vida o defensa lo agrego
-				suma_vida += aux.Bonus();
-		}
-		suma_vida += vida_actual + defensa_base;
-		return suma_vida;
+		return vida_actual + defensa_base;
 	}
+	/**Retorna la vida base del Jugador, sin importar la defensa*/
 	public int vida_actual_IO() {
 		return vida_actual;
 	}
-	/** voy a asumir que la defensa base es constante y que lo primero que resto son la vida de los objetos, 
-	 * si esta llega a 0 elimino el objeto en cuestion, luego resto el valor del ataque con la defensa 
-	 * (esta no se ve afectada) y al final lo que queda se lo resto a la vida base*/
+	/**Retorna la vida resultante de hacer sido atacado el personaje, esto se aplica directamente en el Jugador*/
 	public int cambio_vida(int ataque) {
 		int cambio_vida;
 		cambio_vida = vida_actual_enAtaque() - ataque;
+		if(cambio_vida<0) 
+			cambio_vida=0;
+		vida_actual=cambio_vida;
 		return cambio_vida;
 	}
+	/**Retorna el ataque base del Jugador*/
 	public int Atacar(){
-		int ataque = 0;
-		Objeto aux;
-		for(int i; i < objetos.size(); i++) {
-			aux = objetos.get();
-			if(aux.tipo() == "ataque") // si el objeto es de ataque lo agrego
-				ataque += aux.Bonus();
-		}
-		ataque += ataque_base;
-		return ataque;
+		return ataque_base;
 	}
-	 public int Atacar_Especial() {
-		int aleatorio =  Random(1,2)*(2-1) + 1; // vemos de forma "aleatoria 
+	/**Primero se elige entre uno de los 2 ataques, se ve si tiene los suficientes pp para usarlo y se retorna el valor del ataque,
+	 * mas el valor del ataque base*/
+	public int Atacar_Especial() {
 		int ataque = 0;
-		
+		int aleatorio = ((int) (Math.random()*(101)))%2;
 		if(aleatorio == 1 && ppactual >= ataque_especial1[0]) {
 			ppactual -= ataque_especial1[0];
 			ataque += ataque_especial1[1];
 		}
-		else if(aleatorio == 2 && ppactual >= ataque_especial2[0]) {
+		else if(aleatorio == 0 && ppactual >= ataque_especial2[0]) {
 			ppactual -= ataque_especial2[0];
 			ataque += ataque_especial2[1];
 		}
 		ataque +=Atacar();
 		return ataque;
 	}
+	/**Quiero que tenga la forma dada para el .txt*/
+	 public String ToString() {
+		 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+";"+ataque_especial1[1]+" "+ataque_especial2[0]+";"+ataque_especial2[1] ;
+	 }
 }
