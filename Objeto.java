@@ -1,13 +1,16 @@
 public class Objeto {
-	int bonus;
-	String tipo; // se especifica si es a la vida, ataque o defensa "vida", "ataque", "defensa"
+	private int bonus;
+	private String tipo; // se especifica si es a la vida, ataque o defensa "vida", "ataque", "defensa"
 	
 	public Objeto(int valor, String ntipo) {
 		bonus = valor;
 		tipo = ntipo;
 	}
-	public cambiar_Bonus() {
-		
+	public void cambiar_Bonus(int i) {
+		bonus = i;
+	}
+	public void cambiar_tipo(String i) {
+		tipo = i;
 	}
 	/** Retorna de que tipo es el bonus en cuestion.*/
 	public String tipo() {
@@ -18,6 +21,6 @@ public class Objeto {
 		return bonus;
 	}
 	public String ToString() {
-		return tipo+bonus;
+		return tipo+":"+bonus;
 	}
 }
