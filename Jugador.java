@@ -1,10 +1,10 @@
 import java.util.LinkedList;
-import java.math.random;
+import java.util.Random;
 public class Jugador extends Personaje_Ataca implements Ataque{
 	String Nombre;
-	LinkedList<E> objetos;
-	int ataque_especial1[]; // Ataque Especial 1, [pp, ataque] 
-	int ataque_especial2[]; // Ataque Especial 2, [pp, ataque]
+	LinkedList objetos;
+	int[] ataque_especial1; // Ataque Especial 1, [pp, ataque] 
+	int[] ataque_especial2; // Ataque Especial 2, [pp, ataque]
 	int ppmax; // es el pp maximo que va a tener nuestro personaje
 	int ppactual; // pp a que tiene en un momento dado de la pelea
 	
@@ -15,8 +15,12 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 		super(vida_inicial,ataque_inicial,defensa_inicial,"bueno");
 		Nombre = Name;
 		objetos = new LinkedList();
-		ataque_especial1 = [pp1,bonus1];
-		ataque_especial2 = [pp2,bonus2];
+		ataque_especial1 = new  int[2];
+		ataque_especial2 = new  int[2];
+		ataque_especial1[0]=pp1;
+		ataque_especial1[1]=bonus1;
+		ataque_especial2[0]=pp2;
+		ataque_especial2[1]=bonus2;
 	}
 	/**Agrega el objeto ingresado al jugador.*/
 	public void agregar_objeto(Objeto nuevo) {
@@ -24,7 +28,7 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 	}
 	/**Elimina el objeto dado al Jugador, si no esta no pasa nada.*/
 	public void eliminar(Objeto pormatar) {
-		objetos.remove(pormatar)
+		objetos.remove(pormatar);
 	}
 	/**Retorna la vida del Jugador mas toda la vida extra por los objetos y la defensa*/
 	public int vida_actual_enAtaque(){
@@ -50,7 +54,7 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 		cambio_vida = vida_actual_enAtaque() - ataque;
 		return cambio_vida;
 	}
-	int Atacar(){
+	public int Atacar(){
 		int ataque = 0;
 		Objeto aux;
 		for(int i; i < objetos.size(); i++) {
@@ -61,8 +65,8 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 		ataque += ataque_base;
 		return ataque;
 	}
-	int Atacar_Especial() {
-		int aleatorio = random()*(2-1) + 1; // vemos de forma "aleatoria 
+	 public int Atacar_Especial() {
+		int aleatorio =  Random(1,2)*(2-1) + 1; // vemos de forma "aleatoria 
 		int ataque = 0;
 		
 		if(aleatorio == 1 && ppactual >= ataque_especial1[0]) {
@@ -73,6 +77,7 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 			ppactual -= ataque_especial2[0];
 			ataque += ataque_especial2[1];
 		}
-		ataque += 
+		ataque +=Atacar();
+		return ataque;
 	}
 }
