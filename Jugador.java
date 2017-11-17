@@ -1,6 +1,7 @@
 import java.lang.Math;
-public class Jugador extends Personaje_Ataca implements Ataque{
+public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	String Nombre;
+	
 	int[] ataque_especial1; // Ataque Especial 1, [pp, ataque] 
 	int[] ataque_especial2; // Ataque Especial 2, [pp, ataque]
 	int ppmax; // es el pp maximo que va a tener nuestro personaje

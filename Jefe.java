@@ -1,4 +1,4 @@
-public class Jefe extends Personaje_Ataca implements Ataque, Ataque_especial {
+public class Jefe extends Personaje_Ataca implements Ataque, AtaqueEspecial {
 	String Nombre;
 	int ataque_especial; //es el ataque especial que puede poseer
 	
@@ -28,5 +28,7 @@ public class Jefe extends Personaje_Ataca implements Ataque, Ataque_especial {
 	public int Atacar_Especial() {
 		return ataque_base+ataque_especial;
 	}
-	
+	public String ToString() {
+		 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial;
+	}
 }
