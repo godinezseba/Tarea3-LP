@@ -2,11 +2,12 @@ import java.util.LinkedList;
 import java.util.Random;
 public class Jugador extends Personaje_Ataca implements Ataque{
 	String Nombre;
-	LinkedList objetos;
+	Objeto []objetos; // va a ser un array con maximo 3 Objetos {tuyo,aliado,nivel}
 	int[] ataque_especial1; // Ataque Especial 1, [pp, ataque] 
 	int[] ataque_especial2; // Ataque Especial 2, [pp, ataque]
 	int ppmax; // es el pp maximo que va a tener nuestro personaje
 	int ppactual; // pp a que tiene en un momento dado de la pelea
+	
 	
 	/**Constructor de nuestro jugador, tiene que entregar:
 	 * Vida Inicial, Ataque Inicial, Defensa Inicial, Nombre, Ataque Especial 1:pp, bonus
@@ -14,7 +15,8 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 	public Jugador(int vida_inicial,int ataque_inicial, int defensa_inicial,String Name,int pp1, int pp2, int bonus1, int bonus2){
 		super(vida_inicial,ataque_inicial,defensa_inicial,"bueno");
 		Nombre = Name;
-		objetos = new LinkedList();
+		objetos = new Objeto[3];
+		
 		ataque_especial1 = new  int[2];
 		ataque_especial2 = new  int[2];
 		ataque_especial1[0]=pp1;
@@ -22,12 +24,12 @@ public class Jugador extends Personaje_Ataca implements Ataque{
 		ataque_especial2[0]=pp2;
 		ataque_especial2[1]=bonus2;
 	}
-	/**Agrega el objeto ingresado al jugador.*/
-	public void agregar_objeto(Objeto nuevo) {
-		objetos.add(nuevo);
+	/**Agrega el objeto ingresado al jugador, junto con la posicion {0 = opcional; 1 = aliado; 2 = nivel}.*/
+	public void agregar_objeto(Objeto nuevo,int pos) {
+
 	}
 	/**Elimina el objeto dado al Jugador, si no esta no pasa nada.*/
-	public void eliminar(Objeto pormatar) {
+	public void eliminar(int pos) {
 		objetos.remove(pormatar);
 	}
 	/**Retorna la vida del Jugador mas toda la vida extra por los objetos y la defensa*/

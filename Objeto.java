@@ -6,6 +6,9 @@ public class Objeto {
 		bonus = valor;
 		tipo = ntipo;
 	}
+	public cambiar_Bonus() {
+		
+	}
 	/** Retorna de que tipo es el bonus en cuestion.*/
 	public String tipo() {
 		return tipo;
