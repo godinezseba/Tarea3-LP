@@ -28,7 +28,7 @@ public class Jefe extends Personaje_Ataca implements Ataque, AtaqueEspecial {
 	public int Atacar_Especial() {
 		return ataque_base+ataque_especial;
 	}
-	public String ToString() {
+	public String toString() {
 		 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial;
 	}
 }

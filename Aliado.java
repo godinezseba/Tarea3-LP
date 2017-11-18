@@ -24,8 +24,8 @@ public class Aliado extends Personaje {
 		vida_actual=cambio_vida;
 		return cambio_vida;
 	}
-	public String ToString() {
-		return ""+ vida_actual;
+	public String toString() {
+		return vida_actual + " " + objeto1;
 	}
 		
 }

@@ -20,7 +20,7 @@ public class Objeto {
 	public int Bonus() {
 		return bonus;
 	}
-	public String ToString() {
-		return tipo+":"+bonus;
+	public String toString() {
+		return tipo+" "+bonus;
 	}
 }

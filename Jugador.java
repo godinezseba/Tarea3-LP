@@ -1,7 +1,7 @@
 import java.lang.Math;
 public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	String Nombre;
-	
+	Objeto inicial;
 	int[] ataque_especial1; // Ataque Especial 1, [pp, ataque] 
 	int[] ataque_especial2; // Ataque Especial 2, [pp, ataque]
 	int ppmax; // es el pp maximo que va a tener nuestro personaje
@@ -10,9 +10,12 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	/**Constructor de nuestro jugador, tiene que entregar:
 	 * Vida Inicial, Ataque Inicial, Defensa Inicial, Nombre, Ataque Especial 1:pp, bonus
 	 * Ataque Especial 2: pp, bonus*/
-	public Jugador(int vida_inicial,int ataque_inicial, int defensa_inicial,String Name,int pp1, int pp2, int bonus1, int bonus2){
+	public Jugador(int vida_inicial,int ataque_inicial, int defensa_inicial,String Name,int pp1, int pp2, int bonus1, int bonus2, Objeto aux){
 		super(vida_inicial,ataque_inicial,defensa_inicial,"bueno");
 		Nombre = Name;
+		inicial = aux;
+		ppmax = 50;
+		ppactual = 50;
 		
 		ataque_especial1 = new  int[2];
 		ataque_especial2 = new  int[2];
@@ -31,19 +34,12 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 		else if (nuevo.tipo() == "vida")
 			vida_actual += nuevo.Bonus();
 	}
-	/**Elimina el objeto dado al Jugador, si este se aplica a la vida y la vida da <= 0 retorna True haciendo referencia que murio
-	 * en cualquier otro caso retorna False.*/
-	public Boolean eliminar_objeto(Objeto pormatar) {
+	/**Elimina el objeto dado al Jugador, si este se aplica a la vida no se ve afectado.*/
+	public void eliminar_objeto(Objeto pormatar) {
 		if(pormatar.tipo() == "ataque")
 			ataque_base -= pormatar.Bonus();
 		else if(pormatar.tipo() == "defensa")
 			defensa_base -= pormatar.Bonus();
-		else if (pormatar.tipo() == "vida")
-			vida_actual -= pormatar.Bonus();
-		if(vida_actual <= 0)
-			return true; // retorna True si el Jugador muere por perder el objeto
-		else
-			return false; // retorna False si el Jugador no muere por perder el objeto
 	}
 	/**Retorna la vida del Jugador mas toda la vida extra por los objetos y la defensa*/
 	public int vida_actual_enAtaque(){
@@ -83,7 +79,12 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 		return ataque;
 	}
 	/**Quiero que tenga la forma dada para el .txt*/
-	 public String ToString() {
-		 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+";"+ataque_especial1[1]+" "+ataque_especial2[0]+";"+ataque_especial2[1] ;
+	 public String toString() {
+		 if(inicial.Bonus() == 0) {
+			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1];
+		 }
+		 else {
+			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1] + inicial;
+		 }
 	 }
 }

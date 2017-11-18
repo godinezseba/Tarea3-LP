@@ -24,6 +24,9 @@ public class Enemigo extends Personaje_Ataca implements Ataque {
 		return ataque_base;
 	}
 	
+	public String toString() {
+		return vida_actual +" "+ ataque_base +" "+ defensa_base;
+	}
 	
 }
 	
