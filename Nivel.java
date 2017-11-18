@@ -7,10 +7,12 @@ public class Nivel{
 	Aliado morty;
 	Enemigo lucho_jara;
 	Objeto obj_nivel;
+	int id;
 	
-	public Nivel(String nombre_asignado){
+	public Nivel(String nombre_asignado, int aux){
 		Nombre_nivel=nombre_asignado;
 		Mundo = new int[4];
+		id = aux;
 	}
 	public void crear_jugador(String nombre_jugador, int vida_base_jugador, int Ataque_base, int defensa_base,int pp1, int pp2, int bonus1, int bonus2,Objeto objeto_inicial ) {
 		campeon= new Jugador(vida_base_jugador,Ataque_base,defensa_base , nombre_jugador, pp1,  pp2,  bonus1, bonus2,objeto_inicial);
@@ -32,7 +34,10 @@ public class Nivel{
 		lucho_jara= new Enemigo(vida_inicial,ataque_inicial,defensa_inicial);
 		Mundo[3] = cantidad;
 	}
+	public String StringName() {
+		return id + ". " + Nombre_nivel;
+	}
 	public String toString() {
-		return Nombre_nivel + "\n" + campeon + "\n" + darth_vader +"\n" + morty + "\n" + obj_nivel + "\n" + Mundo[3] + lucho_jara ;
+		return id +" " + Nombre_nivel + "\n" + campeon + "\n" + darth_vader +"\n" + morty + "\n" + obj_nivel + "\n" + Mundo[3] + lucho_jara ;
 	}
 }

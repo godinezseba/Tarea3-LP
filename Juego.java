@@ -3,6 +3,8 @@ public class Juego{
 	
 	
 	static Nivel cuarta_dimension; //variable auxiliar para la creacion de niveles
+	static Nivel []portal_dimensional; // arreglo que contendra todos los Niveles guardados
+	static int cant_niveles; // cantidad de niveles cargados
 	static int  opcion=-1; // variable para las opciones del menu
 	static Scanner terminal; //scanner IO
 	
@@ -218,45 +220,57 @@ public class Juego{
 		cuarta_dimension.crear_enemigo(auxvida,auxataque,auxdefensa, cant);
 	}
 	
+	private static void simulacion(Nivel matrix) {
+		System.out.println(matrix);
+	}
+	
 	public static void main (String [ ] args) {
+		portal_dimensional = new Nivel[100];
+		cant_niveles = 0; // como aun no se lee el archivo partimos con 0 niveles creados
+		// aca deberia ir la funcion que lee el archivo niveles
+		System.out.println("----------- Simulador de Niveles ---------------");
 		
-	System.out.println("----------- Simulador de Niveles ---------------");
-	
-	terminal = new Scanner (System.in);
-	
-		while(opcion!=4) {
-			
-			System.out.println("1. Crear Niveles");
-			System.out.println("2. Simular cambios en Nivel");
-			System.out.println("3. Consultar información de Nivel");
-			System.out.println("4. Salir");
-			System.out.print("Ingrese una opcion: ");
-			opcion = terminal.nextInt(); // elige una opcion
-			
-			while(opcion > 4 || opcion < 1) { // revisa que sea una opcion valida
-				System.out.println("Opcion Invalida!,");
-				System.out.print("Por favor ingrese otra opcion: ");
-				opcion = terminal.nextInt();
-			}
-			if(opcion == 1) {
-				// primero ingresa el nombre del nivel
-				System.out.print("Nombre del Nivel: ");
-				String auxname = terminal.next();
-				cuarta_dimension = new Nivel(auxname);
+		terminal = new Scanner (System.in);
+		
+			while(opcion!=4) {
 				
-				// creo el resto
-				System.out.println("-------- Creacion de Jugador --------");
-				crear_jugador();
-				System.out.println("--------- Creacion de Jefe ----------");
-				crear_jefe();
-				System.out.println("-------- Creacion de Aliado ---------");
-				crear_aliado();
-				System.out.println("---- Creacion de Objeto de Nivel ----");
-				cuarta_dimension.crear_objeto_nivel(crear_objeto());
-				System.out.println("------- Creacion de Enemigos --------");
-				crear_enemigos();
+				System.out.println("1. Crear Niveles");
+				System.out.println("2. Simular cambios en Nivel");
+				System.out.println("3. Consultar información de Nivel");
+				System.out.println("4. Salir");
+				System.out.print("Ingrese una opcion: ");
+				opcion = terminal.nextInt(); // elige una opcion
+				
+				while(opcion > 4 || opcion < 1) { // revisa que sea una opcion valida
+					System.out.println("Opcion Invalida!,");
+					System.out.print("Por favor ingrese otra opcion: ");
+					opcion = terminal.nextInt();
+				}
+				if(opcion == 1) {
+					// primero ingresa el nombre del nivel y su id
+					cant_niveles += 1;
+					System.out.print("Nombre del Nivel: ");
+					String auxname = terminal.next();
+					cuarta_dimension = new Nivel(auxname, cant_niveles);
+					
+					// creo el resto
+					System.out.println("-------- Creacion de Jugador --------");
+					crear_jugador();
+					System.out.println("--------- Creacion de Jefe ----------");
+					crear_jefe();
+					System.out.println("-------- Creacion de Aliado ---------");
+					crear_aliado();
+					System.out.println("---- Creacion de Objeto de Nivel ----");
+					cuarta_dimension.crear_objeto_nivel(crear_objeto());
+					System.out.println("------- Creacion de Enemigos --------");
+					crear_enemigos();
+				}
+				else if(opcion == 2) {
+					for(int i = 0; i < cant_niveles ; i++) {
+						portal_dimensional[i].StringName() ;
+					}
+					// aca llamare la funcion simulacion
+				}
 			}
-			//System.out.println(cuarta_dimension);
-		}
 	}
 }
