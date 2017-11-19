@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.lang.Math;
 
 public class Juego{
@@ -9,6 +12,8 @@ public class Juego{
 	static int cant_niveles; // cantidad de niveles cargados
 	static int  opcion=-1; // variable para las opciones del menu
 	static Scanner terminal; //scanner IO
+
+	private static String[ ] niveles_cargados;
 	
 	private static Objeto crear_objeto() {
 		Objeto auxObjt;
@@ -364,8 +369,125 @@ public class Juego{
 	public static void main (String [ ] args) {
 		portal_dimensional = new Nivel[100];
 		cant_niveles = 0; // como aun no se lee el archivo partimos con 0 niveles creados
-		// aca deberia ir la funcion que lee el archivo niveles
+		String []hola;
+		int []datos_nivel;
+		String []lectura_nivel;
+		int contador_nivel;
+		int cargados=0;
+		Nivel nivelaux;
+		Objeto objetoaux;
+		String []niveles_cargadoss= new String [100];
+	    File archivo = null;
+	    FileReader fr = null;
+	    BufferedReader br = null;
 		System.out.println("----------- Simulador de Niveles ---------------");
+	      try {
+	          // Apertura del fichero y creacion de BufferedReader para poder
+	          // hacer una lectura comoda (disponer del metodo readLine()).
+	          archivo = new File("niveles.txt");
+	          fr = new FileReader (archivo);
+	          br = new BufferedReader(fr);
+
+	          // Lectura del fichero
+	          String linea;
+	          contador_nivel=0;
+	          datos_nivel= new int[20];
+	          lectura_nivel= new String[10];
+	          while((linea=br.readLine())!=null) {
+	        	  contador_nivel+=1;
+
+	          if("#".equals(linea)) {
+	        	  contador_nivel=0;
+		          datos_nivel= new int[20];
+		          lectura_nivel= new String[10];
+	        	  
+	          }
+	          if(contador_nivel==1) {
+	        	  lectura_nivel[0]=linea;
+	        	  niveles_cargadoss[cargados]=linea;
+	        	  cargados+=1;
+	        	  
+	        	  
+	          }
+	          else if (contador_nivel==2) {
+	        	  hola=linea.split(" ");
+	        	  lectura_nivel[1]=hola[0];
+	        	  for(int i=0; i < 7; i ++) {
+	        		  datos_nivel[i]=Integer.parseInt(hola[i+1]);
+	        		  
+	        	  }
+	        	  lectura_nivel[2]=hola[8];
+	        	  datos_nivel[7]=Integer.parseInt(hola[9]);
+	        			  
+	        	  
+	        	  
+	          }
+	          else if (contador_nivel==3) {
+	        	  hola=linea.split(" ");
+	        	  lectura_nivel[2]=hola[0];
+	        	  for(int i=0; i < 4; i ++) {
+	        		  datos_nivel[i+8]=Integer.parseInt(hola[i+1]);
+	        		  
+	        	  }
+	        	  
+	        	  
+	          }
+	          else if (contador_nivel==4) {
+	        	  hola=linea.split(" ");
+	        	  lectura_nivel[3]=hola[1];
+	        	  datos_nivel[12]=Integer.parseInt(hola[0]);
+	        	  datos_nivel[13]=Integer.parseInt(hola[2]);
+	        	  
+	          }
+	          else if(contador_nivel==5) {
+	        	  hola=linea.split(" ");
+	        	  lectura_nivel[4]=hola[0];
+	        	  datos_nivel[14]=Integer.parseInt(hola[1]);
+	        	  
+	          }
+	          else if(contador_nivel==6) {
+	        	  hola=linea.split(" ");
+	        	  for(int i=0; i < 4; i ++) {
+	        		  datos_nivel[i+15]=Integer.parseInt(hola[i]);
+	        		  
+	        	  }
+	        	  nivelaux= new Nivel(lectura_nivel[0],cargados);
+	        	  objetoaux= new Objeto(datos_nivel[7],lectura_nivel[2]);
+	        	  nivelaux.crear_jugador(lectura_nivel[1], datos_nivel[0], datos_nivel[1], datos_nivel[2], datos_nivel[4], datos_nivel[6], datos_nivel[3], datos_nivel[5], objetoaux);
+	        	  nivelaux.crear_villano(datos_nivel[8], datos_nivel[9], datos_nivel[10], datos_nivel[11], lectura_nivel[3]);
+	        	  objetoaux= new Objeto(datos_nivel[13],lectura_nivel[4]);
+	        	  nivelaux.crear_aliado(datos_nivel[12], objetoaux);
+	        	  objetoaux= new Objeto(datos_nivel[14],lectura_nivel[5]);
+	        	  nivelaux.crear_objeto_nivel(objetoaux);
+	        	  nivelaux.crear_enemigo(datos_nivel[16], datos_nivel[17], datos_nivel[18], datos_nivel[15]);
+	        	  
+	          }
+	             
+	       }
+	      }
+	       catch(Exception e){
+	          e.printStackTrace();
+	       }finally{
+	          // En el finally cerramos el fichero, para asegurarnos
+	          // que se cierra tanto si todo va bien como si salta 
+	          // una excepcion.
+	          try{                    
+	             if( null != fr ){   
+	                fr.close();     
+	             }                  
+	          }catch (Exception e2){ 
+	             e2.printStackTrace();
+	          }
+	       }
+
+		
+		
+	      System.out.println("Niveles Cargados: " );
+		for(int i=0; i<cargados;i++) {
+			
+			System.out.println(niveles_cargadoss[i]);
+		}
+		System.out.println(" " );
 		
 		terminal = new Scanner (System.in);
 		
