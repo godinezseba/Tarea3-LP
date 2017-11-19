@@ -94,7 +94,7 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 		return ataque;
 	}
 	public int Probabilidad_Especial() {
-		int random = (int) Math.random()*(6);
+		int random = ((int) Math.random()*(10)) % 2;
 		
 		if (random == 1) {
 			System.out.print("Especial ");

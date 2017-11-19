@@ -35,7 +35,7 @@ public class Jefe extends Personaje_Ataca implements Ataque, AtaqueEspecial {
 		return ataque_base+ataque_especial;
 	}
 	public int Probabilidad_Especial() {
-		int random = (int) Math.random()*(10);
+		int random = (int) Math.random()*(3);
 		
 		if (random == 1) {
 			System.out.print("Especial ");

@@ -235,7 +235,7 @@ public class Juego{
 		// es para ver la aleatoriedad de encontrar el objeto de nivel; encontrar enemigo;quien ataca;a quien ataca 
 		int random_objt,random_enemigo,random_ataca,random_a_ataco; 
 		int enemigos_derrotados = 0; //la cantidad de enemigos q a matado el jugador
-		int daño,vida; //variables utilizadas durante la pelea
+		int daño; //variables utilizadas durante la pelea
 		
 		// variables temporales para la simulacion
 		Jugador temp_jugador = new Jugador(matrix.campeon); 
@@ -251,14 +251,14 @@ public class Juego{
 		temp_jugador.agregar_objeto(temp_jugador.inicial);
 		// aca ocurre la simulacion hasta que el jugador o el jefe muere
 		while(matrix.Mundo[0] != 0 && matrix.Mundo[2] != 0) {
-			System.out.println("------\n" + temp_jugador + "\n" + temp_aliado + "\n" + temp_jefe + "\n----------");
+			//System.out.println("------\n" + temp_jugador + "\n" + temp_aliado + "\n" + temp_jefe + "\n----------");
 			// se tienen 2 estados - > pelea  | no pelea
 			if (!en_pelea) { // si no esta en pelea entramos aca
 				// como no esta en pelea, reseteare los pp gastados del jugador
 				temp_jugador.reset_pp();
 				murio = ""; // reseteo quien murio para no tener problemas despues
 				if(!objt_encontrado) { // si aun no encuentra el objeto vemos si existe la posibilidad de q lo encuentra
-					random_objt = (int) (Math.random()*(10)); 
+					random_objt = (int) (Math.random()*(5)); 
 					if(random_objt == 1) { // una probabilidad del 10% de que encuentre el objeto
 						//aca indica que encontro el objeto en EL ARCHIVO
 						System.out.println("Jugador encontro el Objeto de Nivel!");
@@ -283,6 +283,7 @@ public class Juego{
 			}
 			// si esta en pelea aca se ve eso
 			else { 
+				System.out.println("------\n" + temp_jugador + "\n" + temp_aliado + "\n" + temp_jefe + "\n" + temp_enemigo + "\n----------");
 				random_ataca = (int) (Math.random()*(3)); // veo la probabilidad de quien ataca
 				// entra al if si ataca un malo
 				if(random_ataca == 1) { // la probabilidad de que ataque el malo es 1:3 (puede cambiarce)
@@ -298,18 +299,16 @@ public class Juego{
 						System.out.print("Enemigo " + (enemigos_derrotados + 1) +" ataca ");
 						daño = temp_enemigo.Atacar();
 					}
-					if(random_a_ataco == 1) { // ataca al jugador
+					if(random_a_ataco == 0) { // ataca al jugador
 						System.out.print("Jugador"); // aca deberia guardar en EL ARCHIVO
-						vida = temp_jugador.cambio_vida(daño);
-						if (vida == 0) {
+						if (temp_jugador.cambio_vida(daño) == 0) {
 							murio = "Jugador";
 							matrix.Mundo[0] = 0;
 						}
 					}
 					else {
 						System.out.print("Aliado"); // aca deberia guardar en El ARCHIVO
-						vida = temp_aliado.cambio_vida(daño);
-						if (vida == 0) {
+						if (temp_aliado.cambio_vida(daño) == 0) {
 							murio = "Aliado";
 							matrix.Mundo[1] = 0;	
 						}
@@ -322,8 +321,7 @@ public class Juego{
 					if(peleo == "jefe") {
 						//aca deberia guardar en EL ARCHIVO
 						System.out.print("Jefe");
-						vida = temp_jefe.cambio_vida(daño);
-						if (vida == 0) {
+						if (temp_jefe.cambio_vida(daño) == 0) {
 							murio = "Jefe";
 							matrix.Mundo[2] = 0;
 						}
@@ -331,8 +329,7 @@ public class Juego{
 					else {
 						//aca deberia guardar en EL ARCHIVO
 						System.out.print("Enemigo " + (enemigos_derrotados + 1));
-						vida = temp_enemigo.cambio_vida(daño);
-						if (vida == 0) {
+						if (temp_enemigo.cambio_vida(daño) == 0) {
 							murio = "Enemigo";
 							enemigos_derrotados += 1;
 							en_pelea = false;
@@ -353,6 +350,8 @@ public class Juego{
 					if(murio == "Enemigo") {
 						System.out.print((enemigos_derrotados));
 					}
+					murio = ""; // lo reseteo para que no mande el mensaje de nuevo
+					
 					System.out.println("\n");
 				}
 			}
