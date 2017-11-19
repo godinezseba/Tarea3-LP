@@ -25,6 +25,21 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 		ataque_especial2[0]=pp2;
 		ataque_especial2[1]=bonus2;
 	}
+	public Jugador(Jugador aux){
+		super(aux.vida_actual,aux.ataque_base,aux.defensa_base,"bueno");
+		Nombre = aux.Nombre;
+		inicial = new Objeto(aux.inicial);
+		ppmax = 50;
+		ppactual = 50;
+		
+		ataque_especial1 = new  int[2];
+		ataque_especial2 = new  int[2];
+		
+		ataque_especial1[0] = aux.ataque_especial1[0];
+		ataque_especial1[1] = aux.ataque_especial1[1];
+		ataque_especial2[0] = aux.ataque_especial2[0];
+		ataque_especial2[1] = aux.ataque_especial2[1];
+	}
 	/**Agrega el objeto ingresado al jugador, se asigna directamente a la variable que afecta el objeto.*/
 	public void agregar_objeto(Objeto nuevo) {
 		if(nuevo.tipo() == "ataque")
@@ -66,7 +81,7 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	 * mas el valor del ataque base*/
 	public int Atacar_Especial() {
 		int ataque = 0;
-		int aleatorio = ((int) (Math.random()*(101)))%2;
+		int aleatorio = (int) (Math.random()*(2));
 		if(aleatorio == 1 && ppactual >= ataque_especial1[0]) {
 			ppactual -= ataque_especial1[0];
 			ataque += ataque_especial1[1];

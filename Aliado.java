@@ -3,9 +3,12 @@ public class Aliado extends Personaje {
 	Objeto objeto1;
 	public Aliado (int vida_inicial,Objeto objeto_inicial ) {
 		super(vida_inicial,"bueno");
-		objeto1=objeto_inicial;
+		objeto1 = new Objeto(objeto_inicial);
 	}
-	
+	public Aliado(Aliado aux) {
+		super(aux.vida_actual , aux.Tipo);
+		objeto1 = new Objeto(aux.objeto1);
+	}
 	public Objeto bono_jugador() {
 		return objeto1;
 	}

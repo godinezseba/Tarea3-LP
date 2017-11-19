@@ -6,6 +6,10 @@ public class Objeto {
 		bonus = valor;
 		tipo = ntipo;
 	}
+	public Objeto(Objeto aux){
+		bonus = aux.Bonus();
+		tipo = aux.tipo();		
+	}
 	public void cambiar_Bonus(int i) {
 		bonus = i;
 	}

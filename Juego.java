@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.lang.Math;
+
 public class Juego{
 	
 	
@@ -15,7 +17,7 @@ public class Juego{
 		System.out.println("Elija un Objeto: \n"
 				+ "1. Vida\n"
 				+ "2. Ataque\n"
-				+ "3. Defensa\n");
+				+ "3. Defensa");
 		System.out.print("Elegir: ");
 		opobjt = terminal.nextInt();
 		while((opobjt > 3 || opobjt < 1)) { // revisa que sea una opcion valida
@@ -61,6 +63,7 @@ public class Juego{
 		System.out.print("Defensa Base del Jugador: ");
 		auxdefensa = terminal.nextInt();
 		System.out.println("Eleja 2 Ataques Especiales:\n"
+				+ "(Recuerde que tiene 50 el Jugador.) \n"
 				+ "1. S.D.M.G.    +77 ataque, 10 pp\n"
 				+ "2. Terra Blade +95 ataque, 15 pp\n"
 				+ "3. Last Prism +100 ataque, 18 pp\n"
@@ -211,6 +214,11 @@ public class Juego{
 		int cant;
 		System.out.print("Ingrese la cantidad de Enemigos: ");
 		cant = terminal.nextInt();
+		while(cant < 1) { // revisa que sea una opcion valida
+			System.out.println("Opcion Invalida!,");
+			System.out.print("Por favor ingrese otra opcion: ");
+			cant = terminal.nextInt();
+		}
 		System.out.print("Vida Base del Jugador: ");
 		auxvida = terminal.nextInt();
 		System.out.print("Ataque Base del Jugador: ");
@@ -221,7 +229,51 @@ public class Juego{
 	}
 	
 	private static void simulacion(Nivel matrix) {
-		System.out.println(matrix);
+		// variables para la simulacion
+		String peleo; // un string para saber contra quien esta peleando nuestro jugador
+		boolean en_pelea = false, objt_encontrado = false; // el primero es para saber si esta en pelea, el segundo para saber si ya encontro el objeto
+		int random_objt,random_enemigo; // es para ver la aleatoriedad de encontrar el objeto de nivel
+		int enemigos_derrotados = 0; //la cantidad de enemigos q a matado el jugador
+		// variables temporales para la simulacion
+		Jugador temp_jugador = new Jugador(matrix.campeon); 
+		Aliado temp_aliado = new Aliado(matrix.morty); 
+		Jefe temp_jefe = new Jefe(matrix.darth_vader);
+		
+		//aca agrego idNivel y nombreNivel AL ARCHIVO
+		//aca indico que la simulacion partio en EL ARCHIVO
+		System.out.println("Comienzo!");
+		temp_jugador.agregar_objeto(matrix.morty.objeto1);
+		temp_jugador.agregar_objeto(temp_jugador.inicial);
+		while(matrix.Mundo[0] != 0 || matrix.Mundo[2] != 0) {
+			if (en_pelea){ // si esta en pelea aca se ve eso
+				
+			}
+			else { // si no esta en pelea entramos aca
+				if(objt_encontrado == false) { // si aun no encuentra el objeto vemos si existe la posibilidad de q lo encuentra
+					random_objt = (int) (Math.random()*(10)); 
+					if(random_objt == 1) { // una probabilidad del 10% de que encuentre el objeto
+						//aca indica que encontro el objeto en EL ARCHIVO
+						System.out.println("Jugador encontro el Objeto de Nivel!");
+						temp_jugador.agregar_objeto(matrix.obj_nivel);
+						objt_encontrado = true;
+					}
+				}
+				// una vez visto eso veremos contra quien peleara nuestro heroe..
+				random_enemigo = (int) (Math.random()*(matrix.Mundo[3] - enemigos_derrotados + 1)); // la probabilidad de pelear contra el jefe sera entre 1 : cant_enemigos
+				if(random_enemigo == 0) {
+					peleo = "jefe";
+					System.out.println("Jugador se encontra con el Jefe!");
+					// guardo que pelee contra el jefe en EL ARCHIVO
+				}
+				else { // notar que si ya mate a todos los enemigos si o si entra en jefe
+					Enemigo temp_enemigo = new Enemigo(matrix.lucho_jara); // creo a nuestro enemigo temporal
+					peleo = "enemigo";
+					System.out.println("Jugador se encuentra con Enemigo" + (enemigos_derrotados + 1 ));
+					// guardo que pelee contra un enemigo en EL ARCHIVO
+					
+				}
+			}
+		}
 	}
 	
 	public static void main (String [ ] args) {
@@ -234,7 +286,7 @@ public class Juego{
 		
 			while(opcion!=4) {
 				
-				System.out.println("1. Crear Niveles");
+				System.out.println("\n1. Crear Niveles");
 				System.out.println("2. Simular cambios en Nivel");
 				System.out.println("3. Consultar información de Nivel");
 				System.out.println("4. Salir");
@@ -246,6 +298,7 @@ public class Juego{
 					System.out.print("Por favor ingrese otra opcion: ");
 					opcion = terminal.nextInt();
 				}
+				
 				if(opcion == 1) {
 					// primero ingresa el nombre del nivel y su id
 					cant_niveles += 1;
@@ -264,12 +317,28 @@ public class Juego{
 					cuarta_dimension.crear_objeto_nivel(crear_objeto());
 					System.out.println("------- Creacion de Enemigos --------");
 					crear_enemigos();
+					
+					portal_dimensional[cant_niveles-1] = cuarta_dimension;
+					
 				}
 				else if(opcion == 2) {
-					for(int i = 0; i < cant_niveles ; i++) {
-						portal_dimensional[i].StringName() ;
+					if(cant_niveles == 0) {
+						System.out.println("Aun no crean Niveles!");
 					}
-					// aca llamare la funcion simulacion
+					else {
+						int choice_lvl;
+						for(int i = 0; i < cant_niveles ; i++) {
+							System.out.print(portal_dimensional[i].StringName() + " "); ;
+						}
+						System.out.print("Elegir: ");
+						choice_lvl = terminal.nextInt();
+						while(choice_lvl > cant_niveles || choice_lvl < 1) { // revisa que sea una opcion valida
+							System.out.println("Opcion Invalida!,");
+							System.out.print("Por favor ingrese otra opcion: ");
+							choice_lvl = terminal.nextInt();
+						}
+						simulacion(portal_dimensional[choice_lvl-1]);// aca se llama a la funcion simulacion
+					}
 				}
 			}
 	}

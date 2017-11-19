@@ -1,12 +1,15 @@
 abstract class Personaje{
-  protected int vida_actual;
+  public int vida_actual;
   public String Tipo;
   // el constructor creo q no va aca...(nbo estoy seguro)
   public Personaje(int vida_inicial,String ntipo){
-    vida_actual=vida_inicial;
+    vida_actual = vida_inicial;
     Tipo = ntipo;
   }
-  
+  public Personaje(Personaje aux) {
+	  vida_actual = aux.vida_actual;
+	  Tipo = aux.Tipo;
+  }
   /** Entrega la vida actual de un NPC, si este tiene defenesa base, objetos, etc.
    *  se la suma. */
   abstract int vida_actual_enAtaque();

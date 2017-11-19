@@ -38,6 +38,6 @@ public class Nivel{
 		return id + ". " + Nombre_nivel;
 	}
 	public String toString() {
-		return id +" " + Nombre_nivel + "\n" + campeon + "\n" + darth_vader +"\n" + morty + "\n" + obj_nivel + "\n" + Mundo[3] + lucho_jara ;
+		return Nombre_nivel + "\n" + campeon + "\n" + darth_vader +"\n" + morty + "\n" + obj_nivel + "\n" + Mundo[3] + lucho_jara ;
 	}
 }

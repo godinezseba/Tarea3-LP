@@ -7,8 +7,13 @@ public class Jefe extends Personaje_Ataca implements Ataque, AtaqueEspecial {
 		Nombre = Name;
 		ataque_especial=ataque_2;
 	}
+	public Jefe(Jefe aux) {
+		super(aux.vida_actual,aux.ataque_base,aux.defensa_base,"malo");
+		Nombre = aux.Nombre;
+		ataque_especial = aux.ataque_especial;
+	}
 	public int vida_actual_enAtaque() {
-		return vida_actual+defensa_base;
+		return vida_actual + defensa_base;
 	}
 	public int vida_actual_IO() {
 		return vida_actual;

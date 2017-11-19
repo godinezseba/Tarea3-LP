@@ -4,7 +4,9 @@ public class Enemigo extends Personaje_Ataca implements Ataque {
 		super(vida_inicial, ataque_inicial, defensa_inicial,"malo");
 		 
 	}
-	
+	public Enemigo(Enemigo aux) {
+		super(aux.vida_actual,aux.ataque_base,aux.defensa_base,"malo");
+	}
 	public int vida_actual_enAtaque() {
 		return vida_actual+defensa_base;
 	}
