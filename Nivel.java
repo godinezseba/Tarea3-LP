@@ -34,15 +34,10 @@ public class Nivel{
 		lucho_jara= new Enemigo(vida_inicial,ataque_inicial,defensa_inicial);
 		Mundo[3] = cantidad;
 	}
-	public void reset_Mundo() {
-		Mundo[0] = 1;
-		Mundo[1] = 1;
-		Mundo[2] = 1;
-	}
 	public String StringName() {
 		return id + ". " + Nombre_nivel;
 	}
 	public String toString() {
-		return Nombre_nivel + "\n" + campeon + "\n" + darth_vader +"\n" + morty + "\n" + obj_nivel + "\n" + Mundo[3] + lucho_jara ;
+		return id +" " + Nombre_nivel + "\n" + campeon + "\n" + darth_vader +"\n" + morty + "\n" + obj_nivel + "\n" + Mundo[3] + lucho_jara ;
 	}
 }
