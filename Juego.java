@@ -63,7 +63,7 @@ public class Juego{
 		System.out.print("Defensa Base del Jugador: ");
 		auxdefensa = terminal.nextInt();
 		System.out.println("Eleja 2 Ataques Especiales:\n"
-				+ "(Recuerde que tiene 50 el Jugador.) \n"
+				+ "(Recuerde que tiene 50 pp el Jugador.) \n"
 				+ "1. S.D.M.G.    +77 ataque, 10 pp\n"
 				+ "2. Terra Blade +95 ataque, 15 pp\n"
 				+ "3. Last Prism +100 ataque, 18 pp\n"
@@ -229,27 +229,35 @@ public class Juego{
 	}
 	
 	private static void simulacion(Nivel matrix) {
-		// variables para la simulacion
-		String peleo; // un string para saber contra quien esta peleando nuestro jugador
+		// variables para la simulacion:
+		String peleo = "",murio = ""; // un string para saber contra quien esta peleando nuestro jugador
 		boolean en_pelea = false, objt_encontrado = false; // el primero es para saber si esta en pelea, el segundo para saber si ya encontro el objeto
-		int random_objt,random_enemigo; // es para ver la aleatoriedad de encontrar el objeto de nivel
+		// es para ver la aleatoriedad de encontrar el objeto de nivel; encontrar enemigo;quien ataca;a quien ataca 
+		int random_objt,random_enemigo,random_ataca,random_a_ataco; 
 		int enemigos_derrotados = 0; //la cantidad de enemigos q a matado el jugador
+		int daño,vida; //variables utilizadas durante la pelea
+		
 		// variables temporales para la simulacion
 		Jugador temp_jugador = new Jugador(matrix.campeon); 
 		Aliado temp_aliado = new Aliado(matrix.morty); 
 		Jefe temp_jefe = new Jefe(matrix.darth_vader);
+		Enemigo temp_enemigo = null; // lo iniciare cuando pelee contra el y se reseteara por cada pelea
 		
 		//aca agrego idNivel y nombreNivel AL ARCHIVO
 		//aca indico que la simulacion partio en EL ARCHIVO
+		
 		System.out.println("Comienzo!");
 		temp_jugador.agregar_objeto(matrix.morty.objeto1);
 		temp_jugador.agregar_objeto(temp_jugador.inicial);
-		while(matrix.Mundo[0] != 0 || matrix.Mundo[2] != 0) {
-			if (en_pelea){ // si esta en pelea aca se ve eso
-				
-			}
-			else { // si no esta en pelea entramos aca
-				if(objt_encontrado == false) { // si aun no encuentra el objeto vemos si existe la posibilidad de q lo encuentra
+		// aca ocurre la simulacion hasta que el jugador o el jefe muere
+		while(matrix.Mundo[0] != 0 && matrix.Mundo[2] != 0) {
+			System.out.println("------\n" + temp_jugador + "\n" + temp_aliado + "\n" + temp_jefe + "\n----------");
+			// se tienen 2 estados - > pelea  | no pelea
+			if (!en_pelea) { // si no esta en pelea entramos aca
+				// como no esta en pelea, reseteare los pp gastados del jugador
+				temp_jugador.reset_pp();
+				murio = ""; // reseteo quien murio para no tener problemas despues
+				if(!objt_encontrado) { // si aun no encuentra el objeto vemos si existe la posibilidad de q lo encuentra
 					random_objt = (int) (Math.random()*(10)); 
 					if(random_objt == 1) { // una probabilidad del 10% de que encuentre el objeto
 						//aca indica que encontro el objeto en EL ARCHIVO
@@ -261,19 +269,97 @@ public class Juego{
 				// una vez visto eso veremos contra quien peleara nuestro heroe..
 				random_enemigo = (int) (Math.random()*(matrix.Mundo[3] - enemigos_derrotados + 1)); // la probabilidad de pelear contra el jefe sera entre 1 : cant_enemigos
 				if(random_enemigo == 0) {
-					peleo = "jefe";
+					peleo = "jefe"; // esto me servira para saber contra quien pelea el heroe abajo
 					System.out.println("Jugador se encontra con el Jefe!");
 					// guardo que pelee contra el jefe en EL ARCHIVO
 				}
 				else { // notar que si ya mate a todos los enemigos si o si entra en jefe
-					Enemigo temp_enemigo = new Enemigo(matrix.lucho_jara); // creo a nuestro enemigo temporal
+					temp_enemigo = new Enemigo(matrix.lucho_jara); // creo a nuestro enemigo temporal
 					peleo = "enemigo";
-					System.out.println("Jugador se encuentra con Enemigo" + (enemigos_derrotados + 1 ));
+					System.out.println("Jugador se encuentra con Enemigo " + (enemigos_derrotados + 1 ));
 					// guardo que pelee contra un enemigo en EL ARCHIVO
-					
+				}
+				en_pelea = true;
+			}
+			// si esta en pelea aca se ve eso
+			else { 
+				random_ataca = (int) (Math.random()*(3)); // veo la probabilidad de quien ataca
+				// entra al if si ataca un malo
+				if(random_ataca == 1) { // la probabilidad de que ataque el malo es 1:3 (puede cambiarce)
+					random_a_ataco = (int) (Math.random()*(5 * matrix.Mundo[1]));  // quiero que exista mas probabilidad de al aliado que al heroe de 1:5
+					// notar que si el aliado muere este resultado siempre sera 0 por lo que siempre atacara al jugador
+					if(peleo == "jefe") {
+						//aca deberia guardar en EL ARCHIVO
+						System.out.print("Jefe ataca ");
+						daño = temp_jefe.Probabilidad_Especial();
+					}
+					else {
+						//aca deberia guardar en EL ARCHIVO
+						System.out.print("Enemigo " + (enemigos_derrotados + 1) +" ataca ");
+						daño = temp_enemigo.Atacar();
+					}
+					if(random_a_ataco == 1) { // ataca al jugador
+						System.out.print("Jugador"); // aca deberia guardar en EL ARCHIVO
+						vida = temp_jugador.cambio_vida(daño);
+						if (vida == 0) {
+							murio = "Jugador";
+							matrix.Mundo[0] = 0;
+						}
+					}
+					else {
+						System.out.print("Aliado"); // aca deberia guardar en El ARCHIVO
+						vida = temp_aliado.cambio_vida(daño);
+						if (vida == 0) {
+							murio = "Aliado";
+							matrix.Mundo[1] = 0;	
+						}
+					}
+				}
+				// en este caso el unico que ataca es el jugador
+				else { 
+					System.out.print("Jugador ataca ");
+					daño = temp_jugador.Probabilidad_Especial();
+					if(peleo == "jefe") {
+						//aca deberia guardar en EL ARCHIVO
+						System.out.print("Jefe");
+						vida = temp_jefe.cambio_vida(daño);
+						if (vida == 0) {
+							murio = "Jefe";
+							matrix.Mundo[2] = 0;
+						}
+					}
+					else {
+						//aca deberia guardar en EL ARCHIVO
+						System.out.print("Enemigo " + (enemigos_derrotados + 1));
+						vida = temp_enemigo.cambio_vida(daño);
+						if (vida == 0) {
+							murio = "Enemigo";
+							enemigos_derrotados += 1;
+							en_pelea = false;
+						}
+					}
+				}
+				// aca guardo en EL ARCHIVO la vida
+				System.out.print(", Jugador:" + temp_jugador.vida_actual_IO() + " Aliado:" + temp_aliado.vida_actual_IO() + " ");
+				// con esta parte muestro la vida del enemigo con el que estoy
+				if(peleo == "jefe") {
+					System.out.println("Jefe:" + temp_jefe.vida_actual_IO());
+				}
+				else {
+					System.out.println("Enemigo " + (enemigos_derrotados + 1) + ":" + temp_enemigo.vida_actual_IO());
+				}
+				if(murio != "") { // ACA TAMBIEN DEBERIA GUARDAR EN EL ARCHIVO
+					System.out.print("Murio " + murio + " ");
+					if(murio == "Enemigo") {
+						System.out.print((enemigos_derrotados));
+					}
+					System.out.println("\n");
 				}
 			}
 		}
+		System.out.println("Fin simulacion.");
+		// aca deberia guardar en EL ARCHIVO LO ULTIMO
+		matrix.reset_Mundo();
 	}
 	
 	public static void main (String [ ] args) {
@@ -319,7 +405,7 @@ public class Juego{
 					crear_enemigos();
 					
 					portal_dimensional[cant_niveles-1] = cuarta_dimension;
-					
+					System.out.println("Nivel Creado");
 				}
 				else if(opcion == 2) {
 					if(cant_niveles == 0) {
@@ -330,7 +416,7 @@ public class Juego{
 						for(int i = 0; i < cant_niveles ; i++) {
 							System.out.print(portal_dimensional[i].StringName() + " "); ;
 						}
-						System.out.print("Elegir: ");
+						System.out.print("\nElegir: ");
 						choice_lvl = terminal.nextInt();
 						while(choice_lvl > cant_niveles || choice_lvl < 1) { // revisa que sea una opcion valida
 							System.out.println("Opcion Invalida!,");

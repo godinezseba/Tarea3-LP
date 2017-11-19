@@ -1,3 +1,4 @@
+import java.lang.Math;
 public class Jefe extends Personaje_Ataca implements Ataque, AtaqueEspecial {
 	String Nombre;
 	int ataque_especial; //es el ataque especial que puede poseer
@@ -32,6 +33,17 @@ public class Jefe extends Personaje_Ataca implements Ataque, AtaqueEspecial {
 	}
 	public int Atacar_Especial() {
 		return ataque_base+ataque_especial;
+	}
+	public int Probabilidad_Especial() {
+		int random = (int) Math.random()*(10);
+		
+		if (random == 1) {
+			System.out.print("Especial ");
+			return Atacar_Especial();
+		}
+		else {
+			return Atacar();
+		}
 	}
 	public String toString() {
 		 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial;

@@ -68,9 +68,9 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	public int cambio_vida(int ataque) {
 		int cambio_vida;
 		cambio_vida = vida_actual_enAtaque() - ataque;
-		if(cambio_vida<0) 
-			cambio_vida=0;
-		vida_actual=cambio_vida;
+		if(cambio_vida < 0) 
+			cambio_vida = 0;
+		vida_actual = cambio_vida;
 		return cambio_vida;
 	}
 	/**Retorna el ataque base del Jugador*/
@@ -93,13 +93,27 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 		ataque +=Atacar();
 		return ataque;
 	}
+	public int Probabilidad_Especial() {
+		int random = (int) Math.random()*(6);
+		
+		if (random == 1) {
+			System.out.print("Especial ");
+			return Atacar_Especial();
+		}
+		else {
+			return Atacar();
+		}
+	}
+	public void reset_pp() {
+		ppactual = ppmax;
+	}
 	/**Quiero que tenga la forma dada para el .txt*/
 	 public String toString() {
 		 if(inicial.Bonus() == 0) {
 			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1];
 		 }
 		 else {
-			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1] + inicial;
+			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1] +" " +inicial;
 		 }
 	 }
 }

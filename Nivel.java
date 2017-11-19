@@ -34,6 +34,11 @@ public class Nivel{
 		lucho_jara= new Enemigo(vida_inicial,ataque_inicial,defensa_inicial);
 		Mundo[3] = cantidad;
 	}
+	public void reset_Mundo() {
+		Mundo[0] = 1;
+		Mundo[1] = 1;
+		Mundo[2] = 1;
+	}
 	public String StringName() {
 		return id + ". " + Nombre_nivel;
 	}
