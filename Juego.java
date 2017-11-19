@@ -441,6 +441,8 @@ public class Juego{
 							System.out.print("Por favor ingrese otra opcion: ");
 							choice_lvl = terminal.nextInt();
 						}
+						System.out.println(portal_dimensional[choice_lvl-1].StringAmigable());// aca se llama a la funcion simulacion
+
 					}
 				}
 			}
