@@ -16,8 +16,12 @@ public class Enemigo extends Personaje_Ataca implements Ataque {
 	public int cambio_vida(int ataque) {
 		int cambio_vida;
 		cambio_vida = vida_actual_enAtaque() - ataque;
+		
 		if(cambio_vida<0) {
 			cambio_vida=0;
+		}
+		if(cambio_vida > vida_actual) {
+			return vida_actual;
 		}
 		vida_actual=cambio_vida;
 		return cambio_vida;

@@ -219,11 +219,11 @@ public class Juego{
 			System.out.print("Por favor ingrese otra opcion: ");
 			cant = terminal.nextInt();
 		}
-		System.out.print("Vida Base del Jugador: ");
+		System.out.print("Vida Base del Enemigo: ");
 		auxvida = terminal.nextInt();
-		System.out.print("Ataque Base del Jugador: ");
+		System.out.print("Ataque Base del Enemigo: ");
 		auxataque = terminal.nextInt();
-		System.out.print("Defensa Base del Jugador: ");
+		System.out.print("Defensa Base del Enemigo: ");
 		auxdefensa = terminal.nextInt();
 		cuarta_dimension.crear_enemigo(auxvida,auxataque,auxdefensa, cant);
 	}
@@ -423,6 +423,24 @@ public class Juego{
 							choice_lvl = terminal.nextInt();
 						}
 						simulacion(portal_dimensional[choice_lvl-1]);// aca se llama a la funcion simulacion
+					}
+				}
+				else if(opcion == 3) {
+					if(cant_niveles == 0) {
+						System.out.println("Aun no crean Niveles!");
+					}
+					else {
+						int choice_lvl;
+						for(int i = 0; i < cant_niveles ; i++) {
+							System.out.print(portal_dimensional[i].StringName() + " "); ;
+						}
+						System.out.print("\nElegir: ");
+						choice_lvl = terminal.nextInt();
+						while(choice_lvl > cant_niveles || choice_lvl < 1) { // revisa que sea una opcion valida
+							System.out.println("Opcion Invalida!,");
+							System.out.print("Por favor ingrese otra opcion: ");
+							choice_lvl = terminal.nextInt();
+						}
 					}
 				}
 			}
