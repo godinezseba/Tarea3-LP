@@ -11,3 +11,17 @@ elguatondelafruta 400 80 120 200
 500 defensa 200
 ataque 200
 3 200 100 100
+#
+matinal_mega
+Martin_Carcamo 500 90 100 77 10 100 18 vida 100
+Luchito_Jara 900 150 50 60
+600 ataque 100
+vida 200
+5 200 50 50
+#
+Votaciones_2017
+Sanchez 2000 100 100 77 10 95 15 ataque 50
+Piñi 2000 200 50 60
+900 vida 50
+ataque 100
+10 500 200 50
