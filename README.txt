@@ -1,11 +1,12 @@
-# Tarea3-LP
-
-Personaje.java (Ambos)
-Jugador.java (Seba)
-Aliado.java (Jorge)
-Jefe.java (seba)
-Enemigo.java (jorge)
-Objeto.java (Jorge)
-Nivel.java (Ambos)
-Ataque.java (Seba)
-AtaqueEspecial.java (Jorge)
+############Tarea 3 LP##########################
+# Integrantes:                                 #
+#            Jorge Diaz                        #
+#            Sebastian Godinez                 #
+#Consideraciones:                              #
+#   -Ya que la tarea no fijaba un pp para el   #
+# jugador ni tampoco lo pedia en el menu       #
+# nosotros lo fijamos en 100.                  #
+#                                              #
+#                                              #
+#                                              #
+################################################
