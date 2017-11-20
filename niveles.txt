@@ -21,7 +21,7 @@ vida 200
 #
 Votaciones_2017
 Sanchez 2000 100 100 77 10 95 15 ataque 50
-Piñi 2000 200 50 60
+Pinni 2000 200 50 60
 900 vida 50
 ataque 100
 10 500 200 50

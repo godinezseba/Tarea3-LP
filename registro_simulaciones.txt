@@ -1,0 +1,87 @@
+4. Votaciones_2017
+comienzoSimulacion
+Jugador se encuentra con Enemigo
+Enemigo ataca Aliado, Jugador:2000 Aliado:700 Enemigo:500
+Enemigo ataca Aliado, Jugador:2000 Aliado:500 Enemigo:500
+Enemigo ataca Aliado, Jugador:2000 Aliado:300 Enemigo:500
+Jugador ataca Especial Enemigo, Jugador:2000 Aliado:300 Enemigo:373
+Jugador ataca Especial Enemigo, Jugador:2000 Aliado:300 Enemigo:228
+Jugador ataca Especial Enemigo, Jugador:2000 Aliado:300 Enemigo:101
+Enemigo ataca Aliado, Jugador:2000 Aliado:100 Enemigo:101
+Enemigo ataca Jugador, Jugador:1900 Aliado:100 Enemigo:101
+Enemigo ataca Aliado, Jugador:1900 Aliado:0 Enemigo:101
+Murio Aliado
+Jugador ataca Especial Enemigo, Jugador:1900 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con Enemigo
+Enemigo ataca Jugador, Jugador:1800 Aliado:0 Enemigo:500
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:355
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:228
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:83
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador encontro el Objeto de Nivel
+Jugador se encuentra con Enemigo
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:373
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:246
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:101
+Jugador ataca Especial Enemigo, Jugador:1800 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con Enemigo
+Enemigo ataca Jugador, Jugador:1700 Aliado:0 Enemigo:500
+Jugador ataca Especial Enemigo, Jugador:1700 Aliado:0 Enemigo:373
+Jugador ataca Especial Enemigo, Jugador:1700 Aliado:0 Enemigo:228
+Enemigo ataca Jugador, Jugador:1600 Aliado:0 Enemigo:228
+Jugador ataca Especial Enemigo, Jugador:1600 Aliado:0 Enemigo:83
+Jugador ataca Especial Enemigo, Jugador:1600 Aliado:0 Enemigo:33
+Jugador ataca Especial Enemigo, Jugador:1600 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con Enemigo
+Jugador ataca Especial Enemigo, Jugador:1600 Aliado:0 Enemigo:373
+Enemigo ataca Jugador, Jugador:1500 Aliado:0 Enemigo:373
+Jugador ataca Especial Enemigo, Jugador:1500 Aliado:0 Enemigo:228
+Jugador ataca Especial Enemigo, Jugador:1500 Aliado:0 Enemigo:83
+Jugador ataca Especial Enemigo, Jugador:1500 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con Enemigo
+Enemigo ataca Jugador, Jugador:1400 Aliado:0 Enemigo:500
+Enemigo ataca Jugador, Jugador:1300 Aliado:0 Enemigo:500
+Jugador ataca Especial Enemigo, Jugador:1300 Aliado:0 Enemigo:373
+Jugador ataca Especial Enemigo, Jugador:1300 Aliado:0 Enemigo:246
+Jugador ataca Especial Enemigo, Jugador:1300 Aliado:0 Enemigo:119
+Jugador ataca Especial Enemigo, Jugador:1300 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con Enemigo
+Enemigo ataca Jugador, Jugador:1200 Aliado:0 Enemigo:500
+Jugador ataca Especial Enemigo, Jugador:1200 Aliado:0 Enemigo:355
+Jugador ataca Especial Enemigo, Jugador:1200 Aliado:0 Enemigo:210
+Jugador ataca Especial Enemigo, Jugador:1200 Aliado:0 Enemigo:83
+Jugador ataca Especial Enemigo, Jugador:1200 Aliado:0 Enemigo:33
+Enemigo ataca Jugador, Jugador:1100 Aliado:0 Enemigo:33
+Jugador ataca Especial Enemigo, Jugador:1100 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con Enemigo
+Enemigo ataca Jugador, Jugador:1000 Aliado:0 Enemigo:500
+Jugador ataca Especial Enemigo, Jugador:1000 Aliado:0 Enemigo:355
+Jugador ataca Especial Enemigo, Jugador:1000 Aliado:0 Enemigo:210
+Enemigo ataca Jugador, Jugador:900 Aliado:0 Enemigo:210
+Jugador ataca Especial Enemigo, Jugador:900 Aliado:0 Enemigo:65
+Jugador ataca Especial Enemigo, Jugador:900 Aliado:0 Enemigo:15
+Jugador ataca Especial Enemigo, Jugador:900 Aliado:0 Enemigo:0
+Murio Enemigo
+Jugador se encuentra con el Jefe
+Jefe ataca EspecialJugador, Jugador:740 Aliado:0 Jefe:2000
+Jefe ataca EspecialJugador, Jugador:580 Aliado:0 Jefe:2000
+Jefe ataca EspecialJugador, Jugador:420 Aliado:0 Jefe:2000
+Jugador ataca Especial Jefe, Jugador:420 Aliado:0 Jefe:1873
+Jugador ataca Especial Jefe, Jugador:420 Aliado:0 Jefe:1746
+Jugador ataca Especial Jefe, Jugador:420 Aliado:0 Jefe:1601
+Jefe ataca EspecialJugador, Jugador:260 Aliado:0 Jefe:1601
+Jefe ataca EspecialJugador, Jugador:100 Aliado:0 Jefe:1601
+Jugador ataca Especial Jefe, Jugador:100 Aliado:0 Jefe:1456
+Jugador ataca Especial Jefe, Jugador:100 Aliado:0 Jefe:1406
+Jugador ataca Especial Jefe, Jugador:100 Aliado:0 Jefe:1356
+Jefe ataca EspecialJugador, Jugador:0 Aliado:0 Jefe:1356
+Murio Jugador
+finalSimulacion
+Jugador:0 Aliado:0 Jefe:1356 Enemigos vivos: 2
