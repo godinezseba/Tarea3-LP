@@ -2,15 +2,15 @@ import java.util.Scanner;
 import java.lang.Math;
 import java.io.*;
 public class Juego{
-	
-	
+
+
 	static Nivel cuarta_dimension; //variable auxiliar para la creacion de niveles
 	static Nivel []portal_dimensional; // arreglo que contendra todos los Niveles guardados
 	static int cant_niveles; // cantidad de niveles cargados
 	static int  opcion=-1; // variable para las opciones del menu
 	static Scanner terminal; //scanner IO
-    static FileWriter FP = null; // fichero para escribir en niveles.txt
-    static PrintWriter writer = null; // para poder escribir en niveles.txt
+  static FileWriter FP = null; // fichero para escribir en niveles.txt
+  static PrintWriter writer = null; // para poder escribir en niveles.txt
 	static FileWriter Re = null; // fichero para escribir en registro_simulacion.txt
 	static PrintWriter escritor = null; // para escribir en registro
 
@@ -22,7 +22,7 @@ public class Juego{
     	writer.println(matrix.obj_nivel);
     	writer.println(matrix.Mundo[3] + " " + matrix.lucho_jara);
     }
-	
+
 	private static Objeto crear_objeto() {
 		Objeto auxObjt;
 		int opobjt,auxobjt;
@@ -60,7 +60,7 @@ public class Juego{
 		}
 		return auxObjt;
 	}
-	
+
 	private static void crear_jugador() {
 		String nombreaux;
 		int auxvida,auxataque,auxdefensa,auxpp1,auxpp2,auxbonus1,auxbonus2; // variables que se asignaran al jugador
@@ -174,7 +174,7 @@ public class Juego{
 		}
 		cuarta_dimension.crear_jugador(nombreaux,auxvida,auxataque,auxdefensa,auxpp1,auxpp2,auxbonus1,auxbonus2,auxObjt);
 	}
-	
+
 	private static void crear_jefe() {
 		String nombreaux;
 		int auxvida,auxataque,auxdefensa,auxbonus1; // variables que se asignaran al jefe
@@ -191,7 +191,7 @@ public class Juego{
 		System.out.println("Elija un Ataque Especial:\n"
 				+ "1. Paty Maldonado  +60 ataque, 420 pp\n"
 				+ "2. Karol Dance     +90 ataque, 420 pp");
-		
+
 		// Seleccion del Ataque Especial
 		System.out.print("Elegir: ");
 		op1 = terminal.nextInt();
@@ -212,16 +212,16 @@ public class Juego{
 		}
 		cuarta_dimension.crear_villano(auxvida,auxataque,auxdefensa,auxbonus1,nombreaux);
 	}
-	
+
 	private static void crear_aliado() {
 		int auxvida; //variables que se asignan al aliado
-		
+
 		System.out.print("Vida Base del Aliado: ");
 		auxvida = terminal.nextInt();
-		
+
 		cuarta_dimension.crear_aliado(auxvida, crear_objeto());
 	}
-	
+
 	private static void crear_enemigos() {
 		int auxvida,auxataque,auxdefensa;
 		int cant;
@@ -240,25 +240,25 @@ public class Juego{
 		auxdefensa = terminal.nextInt();
 		cuarta_dimension.crear_enemigo(auxvida,auxataque,auxdefensa, cant);
 	}
-	
+
 	private static void simulacion(Nivel matrix) {
 		// variables para la simulacion:
 		String peleo = "",murio = ""; // un string para saber contra quien esta peleando nuestro jugador
 		boolean en_pelea = false, objt_encontrado = false; // el primero es para saber si esta en pelea, el segundo para saber si ya encontro el objeto
-		// es para ver la aleatoriedad de encontrar el objeto de nivel; encontrar enemigo;quien ataca;a quien ataca 
-		int random_objt,random_enemigo,random_ataca,random_a_ataco; 
+		// es para ver la aleatoriedad de encontrar el objeto de nivel; encontrar enemigo;quien ataca;a quien ataca
+		int random_objt,random_enemigo,random_ataca,random_a_ataco;
 		int enemigos_derrotados = 0; //la cantidad de enemigos q a matado el jugador
-		int daño; //variables utilizadas durante la pelea
-		
+		int danno; //variables utilizadas durante la pelea
+
 		// variables temporales para la simulacion
-		Jugador temp_jugador = new Jugador(matrix.campeon); 
-		Aliado temp_aliado = new Aliado(matrix.morty); 
+		Jugador temp_jugador = new Jugador(matrix.campeon);
+		Aliado temp_aliado = new Aliado(matrix.morty);
 		Jefe temp_jefe = new Jefe(matrix.darth_vader);
 		Enemigo temp_enemigo = null; // lo iniciare cuando pelee contra el y se reseteara por cada pelea
-		
+
 		escritor.println(matrix.StringName());//aca agrego idNivel y nombreNivel AL ARCHIVO
 		escritor.println("comienzoSimulacion");//aca indico que la simulacion partio en EL ARCHIVO
-		
+
 		System.out.println("Comienzo!");
 		temp_jugador.agregar_objeto(matrix.morty.objeto1);
 		temp_jugador.agregar_objeto(temp_jugador.inicial);
@@ -271,7 +271,7 @@ public class Juego{
 				temp_jugador.reset_pp();
 				murio = ""; // reseteo quien murio para no tener problemas despues
 				if(!objt_encontrado) { // si aun no encuentra el objeto vemos si existe la posibilidad de q lo encuentra
-					random_objt = (int) (Math.random()*(5)); 
+					random_objt = (int) (Math.random()*(5));
 					if(random_objt == 1) { // una probabilidad del 10% de que encuentre el objeto
 						escritor.println("Jugador encontro el Objeto de Nivel");//aca indica que encontro el objeto en EL ARCHIVO
 						System.out.println("Jugador encontro el Objeto de Nivel!");
@@ -295,7 +295,7 @@ public class Juego{
 				en_pelea = true;
 			}
 			// si esta en pelea aca se ve eso
-			else { 
+			else {
 				//System.out.println("------\n" + temp_jugador + "\n" + temp_aliado + "\n" + temp_jefe + "\n" + temp_enemigo + "\n----------"); // la uso para ver bugs
 				random_ataca = (int) (Math.random()*(3)); // veo la probabilidad de quien ataca
 				// entra al if si ataca un malo
@@ -305,39 +305,39 @@ public class Juego{
 					if(peleo == "jefe") {
 						escritor.print("Jefe ataca ");//aca deberia guardar en EL ARCHIVO
 						System.out.print("Jefe ataca ");
-						daño = temp_jefe.Probabilidad_Especial(escritor);
+						danno = temp_jefe.Probabilidad_Especial(escritor);
 					}
 					else {
 						escritor.print("Enemigo ataca ");//aca deberia guardar en EL ARCHIVO
 						System.out.print("Enemigo " + (enemigos_derrotados + 1) +" ataca ");
-						daño = temp_enemigo.Atacar();
+						danno = temp_enemigo.Atacar();
 					}
 					if(random_a_ataco == 0) { // ataca al jugador
 						escritor.print("Jugador");// aca deberia guardar en EL ARCHIVO
-						System.out.print("Jugador"); 
-						if (temp_jugador.cambio_vida(daño) == 0) {
+						System.out.print("Jugador");
+						if (temp_jugador.cambio_vida(danno) == 0) {
 							murio = "Jugador";
 							matrix.Mundo[0] = 0;
 						}
 					}
 					else {
 						escritor.print("Aliado");// aca deberia guardar en El ARCHIVO
-						System.out.print("Aliado"); 
-						if (temp_aliado.cambio_vida(daño) == 0) {
+						System.out.print("Aliado");
+						if (temp_aliado.cambio_vida(danno) == 0) {
 							murio = "Aliado";
-							matrix.Mundo[1] = 0;	
+							matrix.Mundo[1] = 0;
 						}
 					}
 				}
 				// en este caso el unico que ataca es el jugador
-				else { 
+				else {
 					escritor.print("Jugador ataca ");
 					System.out.print("Jugador ataca ");
-					daño = temp_jugador.Probabilidad_Especial(escritor);
+					danno = temp_jugador.Probabilidad_Especial(escritor);
 					if(peleo == "jefe") {
 						escritor.print("Jefe");//aca deberia guardar en EL ARCHIVO
 						System.out.print("Jefe");
-						if (temp_jefe.cambio_vida(daño) == 0) {
+						if (temp_jefe.cambio_vida(danno) == 0) {
 							murio = "Jefe";
 							matrix.Mundo[2] = 0;
 						}
@@ -345,7 +345,7 @@ public class Juego{
 					else {
 						escritor.print("Enemigo");//aca deberia guardar en EL ARCHIVO
 						System.out.print("Enemigo " + (enemigos_derrotados + 1));
-						if (temp_enemigo.cambio_vida(daño) == 0) {
+						if (temp_enemigo.cambio_vida(danno) == 0) {
 							murio = "Enemigo";
 							enemigos_derrotados += 1;
 							en_pelea = false;
@@ -370,7 +370,7 @@ public class Juego{
 						System.out.print((enemigos_derrotados));
 					}
 					murio = ""; // lo reseteo para que no mande el mensaje de nuevo
-					
+
 					System.out.println("\n");
 				}
 			}
@@ -381,9 +381,9 @@ public class Juego{
 		// aca deberia guardar en EL ARCHIVO LO ULTIMO
 		matrix.reset_Mundo();
 	}
-	
+
 	public static void main (String [ ] args) {
-		
+
 		portal_dimensional = new Nivel[100];
 		cant_niveles = 0; // como aun no se lee el archivo partimos con 0 niveles creados
 		// todas estas variables son para leer el archivo
@@ -444,19 +444,19 @@ public class Juego{
 	        	  lectura_nivel[3]=hola[1];
 	        	  datos_nivel[12]=Integer.parseInt(hola[0]);
 	        	  datos_nivel[13]=Integer.parseInt(hola[2]);
-	        	  
+
 	          }
 	          else if(contador_nivel==5) {
 	        	  hola=linea.split(" ");
 	        	  lectura_nivel[4]=hola[0];
 	        	  datos_nivel[14]=Integer.parseInt(hola[1]);
-	        	  
+
 	          }
 	          else if(contador_nivel==6) {
 	        	  hola=linea.split(" ");
 	        	  for(int i=0; i < 4; i ++) {
 	        		  datos_nivel[i+15]=Integer.parseInt(hola[i]);
-	        		  
+
 	        	  }
 	        	  nivelaux= new Nivel(lectura_nivel[0],cargados);
 	        	  objetoaux= new Objeto(datos_nivel[7],lectura_nivel[3]);
@@ -470,20 +470,20 @@ public class Juego{
 	        	  cant_niveles += 1;
 	        	  portal_dimensional[cant_niveles-1] = nivelaux;
 	          }
-             
+
           }
 	      }
 	       catch(Exception e){
 	          e.printStackTrace();
 	       }finally{
 	          // En el finally cerramos el fichero, para asegurarnos
-	          // que se cierra tanto si todo va bien como si salta 
+	          // que se cierra tanto si todo va bien como si salta
 	          // una excepcion.
-	          try{                    
-	             if( null != fr ){   
-	                fr.close();     
-	             }                  
-	          }catch (Exception e2){ 
+	          try{
+	             if( null != fr ){
+	                fr.close();
+	             }
+	          }catch (Exception e2){
 	             e2.printStackTrace();
 	          }
 	    }
@@ -509,24 +509,24 @@ public class Juego{
 		writer = new PrintWriter(FP);
 		escritor = new PrintWriter(Re);
 		terminal = new Scanner (System.in);
-		
+
 			while(opcion!=4) {
-				
+
 				System.out.println("\n1. Crear Niveles");
 				System.out.println("2. Simular cambios en Nivel");
-				System.out.println("3. Consultar información de Nivel");
+				System.out.println("3. Consultar informacion de Nivel");
 				System.out.println("4. Salir");
 				System.out.print("Ingrese una opcion: ");
 				opcion = terminal.nextInt(); // elige una opcion
-				
+
 				while(opcion > 4 || opcion < 1) { // revisa que sea una opcion valida
 					System.out.println("Opcion Invalida!,");
 					System.out.print("Por favor ingrese otra opcion: ");
 					opcion = terminal.nextInt();
 				}
-				
+
 				if(opcion == 1) {
-					
+
 					// primero ingresa el nombre del nivel y su id
 					cant_niveles += 1;
 					System.out.print("Nombre del Nivel: ");
@@ -545,11 +545,11 @@ public class Juego{
 					cuarta_dimension.crear_objeto_nivel(crear_objeto());
 					System.out.println("------- Creacion de Enemigos --------");
 					crear_enemigos();
-					
+
 					portal_dimensional[cant_niveles-1] = cuarta_dimension;
 					guardar_Nivel(cuarta_dimension);
 					System.out.println("Nivel Creado");
-					
+
 				}
 				else if(opcion == 2) {
 					if(cant_niveles == 0) {
@@ -604,7 +604,7 @@ public class Juego{
 			System.out.println("Error al cerrar el archivo \"niveles.txt\"");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		System.out.println("Adios!");
 	}
 }
