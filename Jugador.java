@@ -114,11 +114,6 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	}
 	/**Quiero que tenga la forma dada para el .txt*/
 	 public String toString() {
-		 if(inicial.Bonus() == 0) {
-			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1];
-		 }
-		 else {
-			 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[0]+" "+ataque_especial1[1]+" "+ataque_especial2[0]+" "+ataque_especial2[1] +" " +inicial;
-		 }
+		 return Nombre +" "+ vida_actual +" "+ ataque_base +" "+ defensa_base +" "+ataque_especial1[1]+" "+ataque_especial1[0]+" "+ataque_especial2[1]+" "+ataque_especial2[0] +" " +inicial;
 	 }
 }
