@@ -10,5 +10,7 @@
 # para guardar los archivos en niveles.txt y   #
 # simulaciones.txt lo definimos nosotros       #
 #   - Los nombres no pueden contener espacios  #
-#                                              #
+#   - Si ingresa una un numero donde va una se #
+# le piden letras, el programa se cae          #
+# (y vicerversa)                               #
 ################################################
