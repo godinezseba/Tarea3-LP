@@ -6,7 +6,8 @@
 #   -Ya que la tarea no fijaba un pp para el   #
 # jugador ni tampoco lo pedia en el menu       #
 # nosotros lo fijamos en 100.                  #
-#                                              #
-#                                              #
+#   - Debido a que no habia un formato claro   #
+# para guardar los archivos en niveles.txt y   #
+# simulaciones.txt lo definimos nosotros       #
 #                                              #
 ################################################
