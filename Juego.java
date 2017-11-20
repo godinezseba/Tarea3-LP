@@ -305,7 +305,7 @@ public class Juego{
 					if(peleo == "jefe") {
 						escritor.print("Jefe ataca ");//aca deberia guardar en EL ARCHIVO
 						System.out.print("Jefe ataca ");
-						daño = temp_jefe.Probabilidad_Especial();
+						daño = temp_jefe.Probabilidad_Especial(escritor);
 					}
 					else {
 						escritor.print("Enemigo ataca ");//aca deberia guardar en EL ARCHIVO
@@ -333,7 +333,7 @@ public class Juego{
 				else { 
 					escritor.print("Jugador ataca ");
 					System.out.print("Jugador ataca ");
-					daño = temp_jugador.Probabilidad_Especial();
+					daño = temp_jugador.Probabilidad_Especial(escritor);
 					if(peleo == "jefe") {
 						escritor.print("Jefe");//aca deberia guardar en EL ARCHIVO
 						System.out.print("Jefe");
@@ -376,7 +376,7 @@ public class Juego{
 			}
 		}
 		escritor.println("finalSimulacion");
-		escritor.println("Jugador:" + temp_jugador.vida_actual_IO() + " Aliado:" + temp_aliado.vida_actual_IO() + " Jefe:" + temp_jefe.vida_actual_IO() + (matrix.Mundo[3] - enemigos_derrotados ));
+		escritor.println("Jugador:" + temp_jugador.vida_actual_IO() + " Aliado:" + temp_aliado.vida_actual_IO() + " Jefe:" + temp_jefe.vida_actual_IO() + " Enemigos vivos: " + (matrix.Mundo[3] - enemigos_derrotados ));
 		System.out.println("Fin simulacion.");
 		// aca deberia guardar en EL ARCHIVO LO ULTIMO
 		matrix.reset_Mundo();
@@ -459,9 +459,9 @@ public class Juego{
 	        		  
 	        	  }
 	        	  nivelaux= new Nivel(lectura_nivel[0],cargados);
-	        	  objetoaux= new Objeto(datos_nivel[7],lectura_nivel[2]);
+	        	  objetoaux= new Objeto(datos_nivel[7],lectura_nivel[3]);
 	        	  nivelaux.crear_jugador(lectura_nivel[1], datos_nivel[0], datos_nivel[1], datos_nivel[2], datos_nivel[4], datos_nivel[6], datos_nivel[3], datos_nivel[5], objetoaux);
-	        	  nivelaux.crear_villano(datos_nivel[8], datos_nivel[9], datos_nivel[10], datos_nivel[11], lectura_nivel[3]);
+	        	  nivelaux.crear_villano(datos_nivel[8], datos_nivel[9], datos_nivel[10], datos_nivel[11], lectura_nivel[2]);
 	        	  objetoaux= new Objeto(datos_nivel[13],lectura_nivel[4]);
 	        	  nivelaux.crear_aliado(datos_nivel[12], objetoaux);
 	        	  objetoaux= new Objeto(datos_nivel[14],lectura_nivel[5]);

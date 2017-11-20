@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.lang.Math;
 public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 	String Nombre;
@@ -98,10 +99,11 @@ public class Jugador extends Personaje_Ataca implements Ataque, AtaqueEspecial{
 		ataque +=Atacar();
 		return ataque;
 	}
-	public int Probabilidad_Especial() {
+	public int Probabilidad_Especial(PrintWriter escritor) {
 		int random = ((int) Math.random()*(10)) % 2;
 		
-		if (random == 1) {
+		if (random == 0) {
+			escritor.print("Especial ");
 			System.out.print("Especial ");
 			return Atacar_Especial();
 		}
